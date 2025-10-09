@@ -1,0 +1,1 @@
+const knotes = 'notes_app';
