@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CutomTextfild extends StatelessWidget {
-  const CutomTextfild({super.key, required this.hintText, this.maxLines = 1, this.onSaved});
+  const CutomTextfild({super.key, required this.hintText, this.maxLines = 1, this.onSaved, this.onChanged});
   final String hintText;
   final int maxLines;
   final void Function(String?)? onSaved;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class CutomTextfild extends StatelessWidget {
           return null;
         } 
       },
+      onChanged:onChanged ,
       onSaved: onSaved,
       maxLines: maxLines,
       decoration: InputDecoration(

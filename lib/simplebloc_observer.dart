@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SimpleblocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {
@@ -18,7 +17,7 @@ class SimpleblocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-debugPrint("change $change");
+    debugPrint("change $change");
   }
 
   @override
@@ -26,4 +25,16 @@ debugPrint("change $change");
     super.onTransition(bloc, transition);
     // TODO: implement onChange
   }
-} 
+
+  @override
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    debugPrint("close $bloc");
+  }
+
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    debugPrint("create $bloc");
+  }
+}

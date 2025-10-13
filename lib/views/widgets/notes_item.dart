@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/addnote_cubit/addnotes_cubit.dart';
+import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/views/editnote_secren.dart';
 
 class notes_item extends StatelessWidget {
+  const notes_item({super.key, required this.note});
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 22, bottom: 22),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const editnote_secren();
-          })); 
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return editnote_secren(note: note,);
+              },
+            ),
+          );
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.yellow,
+            color: Color(note.color),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -22,13 +33,13 @@ class notes_item extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  "flutter tips",
+                  note.title,
                   style: TextStyle(color: Colors.black, fontSize: 28),
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 14),
                   child: Text(
-                    "built your app with anas ghanem ",
+                    note.subtitle,
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.5),
                       fontSize: 18,
@@ -36,14 +47,17 @@ class notes_item extends StatelessWidget {
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    note.delete();
+                    BlocProvider.of<notesCubit>(context).fetchall_notes();
+                  },
                   icon: Icon(Icons.delete, color: Colors.black, size: 28),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 16),
                 child: Text(
-                  "12/12/2024",
+                  note.date,
                   style: TextStyle(color: Colors.black.withOpacity(0.4)),
                 ),
               ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class custom_button extends StatelessWidget {
-  const custom_button({super.key, this.onTap});
+  const custom_button({super.key, this.onTap , this.isloading = false});
 
      final void Function()? onTap;
+     final bool isloading ;
 
 
   @override
@@ -18,7 +19,7 @@ class custom_button extends StatelessWidget {
           color: Colors.blue,
           borderRadius: BorderRadius.circular(16),
         ),child: Center(
-          child: Text(
+          child: isloading ?CircularProgressIndicator()  :Text(
             "Add Note",
             style: TextStyle(
               color: Colors.white,
